@@ -2,73 +2,88 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Unusualy</title>
-
-    <meta name="theme-color" content="#075E54">
-
-    <!-- KONFIGURASI KHUSUS APPLE -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Report Unusualy">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>REPORT-UNUSUALLY</title>
     
-    <!-- Tag Utama Ikon untuk iOS Safari -->
+    <!-- Favicon Standar & Android -->
+    <link rel="icon" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png" type="image/png">
+    
+    <!-- Konfigurasi Khusus iPhone / iOS (Safari) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="REPORT-UNUSUALLY">
     <link rel="apple-touch-icon" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
 
-    <!-- Favicon Standar -->
-    <link rel="icon" type="image/png" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="shortcut icon" type="image/png" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
+    <!-- Konfigurasi Warna Tema Browser Android -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Manifest untuk Android / Chrome -->
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Report Unusualy","short_name":"Report Unusualy","start_url":".","display":"standalone","background_color":"%23ffffff","theme_color":"%23075E54","icons":[{"src":"https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
+    <!-- Placeholder Manifest PWA -->
+    <link rel="manifest" id="pwa-manifest">
 
     <style>
         html, body {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #eeeeee;
             overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overscroll-behavior-y: contain;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* Splash Screen */
+        /* Splash Screen Kustom */
         #splash-screen {
             position: fixed;
             inset: 0;
+            z-index: 9999;
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            z-index: 99999;
+            justify-content: center;
+            gap: 14px;
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        #splash-screen.hide {
+
+        #splash-screen.fade-out {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
+
         .splash-logo {
-            max-width: 180px;
-            width: 45vw;
-            height: auto;
+            width: 92px;
+            height: 92px;
             object-fit: contain;
-            margin-bottom: 24px;
-            animation: pulseLogo 1.8s ease-in-out infinite;
+            border-radius: 20px;
+            animation: pulse 1.6s ease-in-out infinite;
         }
+
         .splash-title {
-            font-size: 22px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
             color: #1f2937;
-            letter-spacing: 0.3px;
-            margin: 0;
         }
-        @keyframes pulseLogo {
+
+        .splash-loader {
+            width: 26px;
+            height: 26px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #111827;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-top: 4px;
+        }
+
+        @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .iframe-container {
@@ -77,168 +92,84 @@
             height: 100dvh;
             overflow: hidden;
         }
+
         iframe {
             display: block;
-            width: 100%; height: 100%;
-            border: none;
-        }
-
-        /* Tombol Install Melayang */
-        #install-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #075E54;
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            gap: 8px;
-        }
-        #install-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Modal Panduan untuk iOS */
-        #ios-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        .ios-card {
-            background: white;
             width: 100%;
-            max-width: 500px;
-            padding: 24px;
-            border-radius: 20px 20px 0 0;
-            text-align: center;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-            animation: slideUp 0.3s ease-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-        .ios-card h3 { margin-top: 0; color: #075E54; }
-        .ios-card p { font-size: 14px; color: #333; line-height: 1.5; }
-        .close-modal {
-            background: #075E54;
-            color: white;
+            height: 100%;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: bold;
-            width: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen Awal -->
+    <!-- Tampilan Splash Screen -->
     <div id="splash-screen">
-        <img class="splash-logo"
-             src="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png"
-             alt="Logo Report Unusualy">
-        <p class="splash-title">Report Unusualy</p>
+        <img
+            src="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png"
+            alt="Logo REPORT-UNUSUALLY"
+            class="splash-logo"
+        >
+        <div class="splash-title">REPORT-UNUSUALLY</div>
+        <div class="splash-loader"></div>
     </div>
 
     <div class="iframe-container">
-        <iframe id="app"
+        <iframe
+            id="app"
             src="https://script.google.com/macros/s/AKfycbyA9-KouDfdeV-MDe5GFxAvXWD7Dynph2Gzn5U1TTlt1XBreNNQsYw9PPKGnEMaSSZLTA/exec"
             allow="fullscreen; camera; microphone; display-capture; geolocation">
         </iframe>
     </div>
 
-    <!-- Tombol Install Mengambang -->
-    <button id="install-btn">
-        📥 Install Aplikasi
-    </button>
-
-    <!-- Modal Panduan Install untuk iPhone / Safari -->
-    <div id="ios-modal">
-        <div class="ios-card">
-            <h3>Install di iPhone / Safari</h3>
-            <p>Ikuti langkah berikut agar ikon aplikasi muncul di layar utama:</p>
-            <p style="text-align: left; background: #f9f9f9; padding: 12px; border-radius: 8px;">
-                1. Ketuk ikon <b>Share</b> (kotak dengan panah ke atas <span style="font-size:18px;">⎋</span>) di bagian bawah Safari.<br>
-                2. Cari dan pilih opsi <b>"Add to Home Screen"</b> (Tambah ke Layar Utama).<br>
-                3. Ketuk <b>Add</b> (Tambah) di pojok kanan atas.
-            </p>
-            <button class="close-modal" onclick="closeIosModal()">Mengerti</button>
-        </div>
-    </div>
-
     <script>
-        // Logika Splash Screen
-        const splashScreen = document.getElementById('splash-screen');
-        const appIframe = document.getElementById('app');
-        let splashHidden = false;
+        // Membuat Web App Manifest secara dinamis
+        const manifestData = {
+            "name": "REPORT-UNUSUALLY",
+            "short_name": "REPORT",
+            "start_url": window.location.href,
+            "display": "standalone",
+            "background_color": "#ffffff",
+            "theme_color": "#ffffff",
+            "icons": [
+                {
+                    "src": "https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+
+        const stringManifest = JSON.stringify(manifestData);
+        const blob = new Blob([stringManifest], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(blob);
+        document.querySelector('#pwa-manifest').setAttribute('href', manifestURL);
+
+        // Mengatur hilangnya splash screen setelah iframe siap (dengan batas waktu aman)
+        const splash = document.getElementById('splash-screen');
+        const iframe = document.getElementById('app');
+        let isHidden = false;
 
         function hideSplash() {
-            if (splashHidden) return;
-            splashHidden = true;
-            splashScreen.classList.add('hide');
+            if (isHidden) return;
+            isHidden = true;
+            splash.classList.add('fade-out');
+            setTimeout(() => {
+                splash.remove();
+            }, 450);
         }
 
-        // Sembunyikan splash screen setelah iframe selesai dimuat (beri jeda singkat agar transisi halus)
-        appIframe.addEventListener('load', () => {
-            setTimeout(hideSplash, 600);
+        // Sembunyikan saat iframe selesai memuat
+        iframe.addEventListener('load', () => {
+            setTimeout(hideSplash, 500);
         });
 
-        // Fallback maksimal 5 detik agar splash screen tidak tertahan jika iframe lambat
-        setTimeout(hideSplash, 5000);
-
-        // Logika Install PWA
-        let deferredPrompt;
-        const installBtn = document.getElementById('install-btn');
-        const iosModal = document.getElementById('ios-modal');
-
-        const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
-        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
-
-        if (isIos && !isInStandaloneMode) {
-            installBtn.style.display = 'flex';
-            installBtn.addEventListener('click', () => {
-                iosModal.style.display = 'flex';
-            });
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'flex';
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.style.display = 'none';
-                }
-                deferredPrompt = null;
-            }
-        });
-
-        function closeIosModal() {
-            iosModal.style.display = 'none';
-        }
-
-        window.addEventListener('appinstalled', () => {
-            installBtn.style.display = 'none';
-            deferredPrompt = null;
-        });
+        // Fallback maksimal 6 detik agar tidak nyangkut jika jaringan lambat atau event load terhambat
+        setTimeout(hideSplash, 6000);
     </script>
 </body>
 </html>
