@@ -18,7 +18,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Placeholder Manifest PWA -->
+    <!-- Placeholder Manifest PWA (Diisi otomatis oleh script di bawah) -->
     <link rel="manifest" id="pwa-manifest">
 
     <style>
@@ -27,63 +27,10 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #eeeeee;
+            background-color: #eee;
             overflow: hidden;
-            overscroll-behavior-y: contain;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        /* Splash Screen Kustom */
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-
-        #splash-screen.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .splash-logo {
-            width: 92px;
-            height: 92px;
-            object-fit: contain;
-            border-radius: 20px;
-            animation: pulse 1.6s ease-in-out infinite;
-        }
-
-        .splash-title {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 0.6px;
-            color: #1f2937;
-        }
-
-        .splash-loader {
-            width: 26px;
-            height: 26px;
-            border: 3px solid #e5e7eb;
-            border-top-color: #111827;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-top: 4px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            /* Mencegah efek pull-to-refresh bawaan browser saat jadi aplikasi */
+            overscroll-behavior-y: contain; 
         }
 
         .iframe-container {
@@ -102,17 +49,6 @@
     </style>
 </head>
 <body>
-    <!-- Tampilan Splash Screen -->
-    <div id="splash-screen">
-        <img
-            src="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png"
-            alt="Logo REPORT-UNUSUALLY"
-            class="splash-logo"
-        >
-        <div class="splash-title">REPORT-UNUSUALLY</div>
-        <div class="splash-loader"></div>
-    </div>
-
     <div class="iframe-container">
         <iframe
             id="app"
@@ -122,13 +58,13 @@
     </div>
 
     <script>
-        // Membuat Web App Manifest secara dinamis
+        // Membuat Web App Manifest secara dinamis agar tidak butuh file manifest.json terpisah
         const manifestData = {
             "name": "REPORT-UNUSUALLY",
             "short_name": "REPORT",
             "start_url": window.location.href,
             "display": "standalone",
-            "background_color": "#ffffff",
+            "background_color": "#eeeeee",
             "theme_color": "#ffffff",
             "icons": [
                 {
@@ -145,31 +81,9 @@
         };
 
         const stringManifest = JSON.stringify(manifestData);
-        const blob = new Blob([stringManifest], { type: 'application/json' });
+        const blob = new Blob([stringManifest], {type: 'application/json'});
         const manifestURL = URL.createObjectURL(blob);
         document.querySelector('#pwa-manifest').setAttribute('href', manifestURL);
-
-        // Mengatur hilangnya splash screen setelah iframe siap (dengan batas waktu aman)
-        const splash = document.getElementById('splash-screen');
-        const iframe = document.getElementById('app');
-        let isHidden = false;
-
-        function hideSplash() {
-            if (isHidden) return;
-            isHidden = true;
-            splash.classList.add('fade-out');
-            setTimeout(() => {
-                splash.remove();
-            }, 450);
-        }
-
-        // Sembunyikan saat iframe selesai memuat
-        iframe.addEventListener('load', () => {
-            setTimeout(hideSplash, 500);
-        });
-
-        // Fallback maksimal 6 detik agar tidak nyangkut jika jaringan lambat atau event load terhambat
-        setTimeout(hideSplash, 6000);
     </script>
 </body>
 </html>
