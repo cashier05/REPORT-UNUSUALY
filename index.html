@@ -3,176 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REPORT-UNUSUALY</title>
 
-    <meta name="theme-color" content="#075E54">
+    <title>REPORT UNUSUALY</title>
 
-    <!-- KONFIGURASI KHUSUS APPLE (PENTING AGAR IKON MUNCUL DI IPHONE) -->
+    <meta name="theme-color" content="#B71C1C">
+
+    <!-- KONFIGURASI iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Report Unusualy">
-    
-    <!-- Tag Utama Ikon untuk iOS Safari -->
-    <link rel="apple-touch-icon" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
 
-    <!-- Favicon Standar -->
-    <link rel="icon" type="image/png" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
-    <link rel="shortcut icon" type="image/png" href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
+    <!-- ICON -->
+    <link rel="apple-touch-icon"
+        href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
 
-    <!-- Manifest untuk Android / Chrome -->
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Report Unusualy","short_name":"Report Unusualy","start_url":".","display":"standalone","background_color":"%23ffffff","theme_color":"%23075E54","icons":[{"src":"https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
+    <link rel="icon" type="image/png"
+        href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
+
+    <link rel="shortcut icon" type="image/png"
+        href="https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png">
+
+    <!-- MANIFEST -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"REPORT UNUSUALY","short_name":"UNUSUALY","start_url":".","display":"standalone","background_color":"%23ffffff","theme_color":"%23B71C1C","icons":[{"src":"https://pdftourl.net/images/1795338011001-78b16720-f38f-450a-8a33-3264f4a2eabc.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
 
     <style>
-        html, body {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            background-color: #eee;
-            overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        * {
+            box-sizing: border-box;
         }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #f1f1f1;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, sans-serif;
+        }
+
         .iframe-container {
             width: 100%;
             height: 100vh;
             height: 100dvh;
             overflow: hidden;
         }
+
         iframe {
             display: block;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             border: none;
+            background: white;
         }
-        /* Tombol Install Melayang */
+
+        /* INSTALL BUTTON */
         #install-btn {
             position: fixed;
-            bottom: 20px;
+            bottom: 22px;
             right: 20px;
-            background-color: #075E54;
+            background: #B71C1C;
             color: white;
             border: none;
-            padding: 12px 18px;
+            padding: 13px 20px;
             border-radius: 50px;
             font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
             z-index: 9999;
             display: none;
             align-items: center;
             gap: 8px;
+            transition: 0.2s;
         }
+
         #install-btn:active {
             transform: scale(0.95);
         }
-        /* Modal Panduan untuk iOS */
+
+        /* IOS MODAL */
         #ios-modal {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
+            inset: 0;
+            background: rgba(0,0,0,0.65);
             z-index: 10000;
             display: none;
             justify-content: center;
             align-items: flex-end;
         }
+
         .ios-card {
             background: white;
             width: 100%;
             max-width: 500px;
-            padding: 24px;
-            border-radius: 20px 20px 0 0;
+            padding: 25px;
+            border-radius: 22px 22px 0 0;
             text-align: center;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
             animation: slideUp 0.3s ease-out;
         }
+
         @keyframes slideUp {
             from { transform: translateY(100%); }
             to { transform: translateY(0); }
         }
-        .ios-card h3 { margin-top: 0; color: #075E54; }
-        .ios-card p { font-size: 14px; color: #333; line-height: 1.5; }
+
+        .ios-card h3 {
+            margin-top: 0;
+            color: #B71C1C;
+            font-size: 19px;
+        }
+
+        .ios-card p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .ios-steps {
+            text-align: left;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
         .close-modal {
-            background: #075E54;
+            background: #B71C1C;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             margin-top: 15px;
             font-weight: bold;
             width: 100%;
+            cursor: pointer;
         }
+
     </style>
 </head>
+
 <body>
+
+    <!-- APLIKASI UTAMA -->
     <div class="iframe-container">
-        <iframe id="app"
+        <iframe
+            id="app"
             src="https://script.google.com/macros/s/AKfycbyA9-KouDfdeV-MDe5GFxAvXWD7Dynph2Gzn5U1TTlt1XBreNNQsYw9PPKGnEMaSSZLTA/exec"
             allow="fullscreen; camera; microphone; display-capture; geolocation">
         </iframe>
     </div>
 
-    <!-- Tombol Install Mengambang -->
+    <!-- INSTALL BUTTON -->
     <button id="install-btn">
-        📥 Install Aplikasi
+        📥 Install Report Unusualy
     </button>
 
-    <!-- Modal Panduan Install untuk iPhone / Safari -->
+    <!-- IOS INSTALL MODAL -->
     <div id="ios-modal">
         <div class="ios-card">
-            <h3>Install di iPhone / Safari</h3>
-            <p>Ikuti langkah berikut agar ikon aplikasi muncul di layar utama:</p>
-            <p style="text-align: left; background: #f9f9f9; padding: 12px; border-radius: 8px;">
-                1. Ketuk ikon <b>Share</b> (kotak dengan panah ke atas <span style="font-size:18px;">⎋</span>) di bagian bawah Safari.<br>
-                2. Cari dan pilih opsi <b>"Add to Home Screen"</b> (Tambah ke Layar Utama).<br>
-                3. Ketuk <b>Add</b> (Tambah) di pojok kanan atas.
+
+            <h3>REPORT UNUSUALY</h3>
+
+            <p>
+                Tambahkan aplikasi ke layar utama iPhone
+                agar lebih mudah diakses.
             </p>
-            <button class="close-modal" onclick="closeIosModal()">Mengerti</button>
+
+            <div class="ios-steps">
+                1. Ketuk ikon <b>Share</b> di bagian bawah Safari.<br><br>
+
+                2. Pilih opsi <b>Add to Home Screen</b>.<br><br>
+
+                3. Ketuk <b>Add</b> di pojok kanan atas.
+            </div>
+
+            <button class="close-modal" onclick="closeIosModal()">
+                MENGERTI
+            </button>
+
         </div>
     </div>
 
     <script>
-        let deferredPrompt;
+
+        let deferredPrompt = null;
+
         const installBtn = document.getElementById('install-btn');
         const iosModal = document.getElementById('ios-modal');
 
-        const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
-        const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
+        const isIos = /iphone|ipad|ipod/i.test(
+            navigator.userAgent
+        );
 
-        // Tampilkan tombol untuk iOS jika belum dalam mode standalone
-        if (isIos && !isInStandaloneMode) {
+        const isStandalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            navigator.standalone === true;
+
+        // IOS
+        if (isIos && !isStandalone) {
+
             installBtn.style.display = 'flex';
+
             installBtn.addEventListener('click', () => {
                 iosModal.style.display = 'flex';
             });
+
         }
 
-        // Tangkap event install untuk Android
+        // ANDROID INSTALL
         window.addEventListener('beforeinstallprompt', (e) => {
+
             e.preventDefault();
+
             deferredPrompt = e;
-            installBtn.style.display = 'flex';
-        });
 
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.style.display = 'none';
-                }
-                deferredPrompt = null;
+            if (!isStandalone) {
+                installBtn.style.display = 'flex';
             }
+
         });
 
+        // TOMBOL INSTALL
+        installBtn.addEventListener('click', async () => {
+
+            if (!deferredPrompt) return;
+
+            deferredPrompt.prompt();
+
+            const result = await deferredPrompt.userChoice;
+
+            if (result.outcome === 'accepted') {
+                installBtn.style.display = 'none';
+            }
+
+            deferredPrompt = null;
+
+        });
+
+        // TUTUP MODAL IOS
         function closeIosModal() {
             iosModal.style.display = 'none';
         }
 
-        window.addEventListener('appinstalled', () => {
-            installBtn.style.display = 'none';
-            deferredPrompt = null;
+        // TUTUP MODAL KLIK LUAR
+        iosModal.addEventListener('click', (e) => {
+
+            if (e.target === iosModal) {
+                closeIosModal();
+            }
+
         });
+
+        // JIKA APLIKASI BERHASIL DIINSTALL
+        window.addEventListener('appinstalled', () => {
+
+            installBtn.style.display = 'none';
+
+            deferredPrompt = null;
+
+        });
+
     </script>
+
 </body>
-        </html>
+</html>
